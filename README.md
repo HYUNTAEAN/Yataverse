@@ -1,2 +1,3 @@
 # Yataverse
-![ya](https://user-images.githubusercontent.com/88410343/146047449-b04eb43c-23de-4419-a315-51bc306b1f80.png)
+
+![ya-removebg-preview](https://user-images.githubusercontent.com/88410343/146048494-59197ec8-256b-47c0-9991-d7880813a776.png)
