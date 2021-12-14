@@ -12,10 +12,9 @@ public class MainController {
         return "main";
     }
 
-    @RequestMapping("/greetings")
-    public String greetings(Model model){
-        model.addAttribute("name" , "너" );
-        return "greetings";
+    @RequestMapping("/login")
+    public String Login(){
+        return "login";
     }
     @RequestMapping("/goodbye")
     public String goodbye(Model model){

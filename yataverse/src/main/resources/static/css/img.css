@@ -5,3 +5,9 @@
   display: block;
   margin: 0 auto;
 }
+
+.navbar-brand img{
+            overflow: hidden;
+            height:50px;
+            width:200px;
+        }
