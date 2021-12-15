@@ -1,0 +1,118 @@
+{{>layouts/header}}
+
+<!-- content -->
+<div class="container">
+    <div class="input-form-backgroud row">
+        <div class="input-form col-md-12 mx-auto">
+            <h4 class="mb-3">Join us</h4>
+            <form class="validation-form" action="/join/create" method="post" onsubmit="return formChk();">
+                <div class="mb-3">
+                    <label for="userid">ID</label>
+                    <input type="text" class="form-control" id="userid" name="userid" placeholder="" required>
+                    <div class="invalid-feedback"> Please check your id </div>
+                </div>
+                <div id="id_warn"></div>
+                <div class="mb-3">
+                    <label for="userpwd">PWD</label>
+                    <input type="password" class="form-control" id="userpwd" name="userpwd" placeholder="" required>
+                    <div class="invalid-feedback"> Please check your pwd </div>
+                </div>
+                <div class="mb-3">
+                    <label for="password">PWD Check</label>
+                    <input type="password" class="form-control" id="pwdchk" placeholder="" required>
+                    <div class="invalid-feedback"> Please check your pwd </div>
+                </div>
+                <div id="pwd_warn"></div>
+                <div class="mb-3">
+                    <label for="email">Mail Address</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
+                    <div class="invalid-feedback"> Please check your email </div>
+                </div>
+                <div class="mb-3">
+                    <label for="address">City</label>
+                    <input type="text" class="form-control" id="address" name="address" placeholder="Gu Gangnam, City Seoul" required>
+                    <div class="invalid-feedback"> Please check your address </div>
+                </div>
+                <div class="mb-3">
+                    <label for="address2">Street<span class="text-muted">&nbsp;(필수 아님)</span></label>
+                    <input type="text" class="form-control" id="address2" placeholder="상세주소를 입력해주세요.">
+                    <input type="hidden" id="finaladdress" name="useraddress" value="">
+                </div>
+                <hr class="mb-4">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="aggrement" required>
+                    <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
+                </div>
+                <div class="mb-4"></div>
+                <button class="btn btn-primary btn-lg btn-block" id="submitBtn" type="submit">가입 완료</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function(){
+    $('#userid').focusout(function(){
+        let userid = $('#userid').val();
+        let myData = { "userid" : userid };
+
+        $.ajax({
+            url : 'idchk'
+            , method : 'get'
+            , data : myData
+            , success : function(resp){
+                if(resp == 0) {
+                    $('#id_warn').text("사용중인 아이디입니다.");
+                    $("#id_warn").css("color", "red");
+                    $("#id_warn").css("font-size", "15px");
+					$("#id_warn").css("margin-left", "0px");
+
+					$("#submitBtn").attr("disabled", true);
+                } else {
+                    $('#id_warn').text("사용 가능한 아이디입니다.");
+                    $("#id_warn").css("color", "blue");
+                    $("#id_warn").css("font-size", "15px");
+					$("#id_warn").css("margin-left", "0px");
+
+					$("#submitBtn").attr("disabled", false);
+                }
+            }
+        });
+    })
+})
+
+function formChk(){
+    let userid = $('#userid').val();
+    let userpwd = $('#userpwd').val();
+    let pwdchk = $('#pwdchk').val();
+    let address = $('#address').val();
+    let address2 = $('#address2').val();
+    let useraddress = address + " " + address2;
+    $('#finaladdress').val(useraddress);
+
+    if(userid.trim().length < 3 || userid.trim().length > 10){
+        $('#id_warn').text("아이디는 3~10글자 이내로 입력해주세요.");
+        $("#id_warn").css("color", "red");
+        $("#id_warn").css("font-size", "15px");
+        $("#id_warn").css("margin-left", "0px");
+        return false;
+    }
+    if(userpwd.trim().length < 3 || userpwd.trim().length > 10){
+        $('#pwd_warn').text("비밀번호는 3~10글자 이내로 입력해주세요.");
+        $("#pwd_warn").css("color", "red");
+        $("#pwd_warn").css("font-size", "15px");
+        $("#pwd_warn").css("margin-left", "0px");
+        return false;
+    }
+    if(userpwd != pwdchk){
+        $('#pwd_warn').text("비밀번호가 불일치 합니다.");
+        $("#pwd_warn").css("color", "red");
+        $("#pwd_warn").css("font-size", "15px");
+        $("#pwd_warn").css("margin-left", "0px");
+        return false;
+    }
+
+    return true;
+}
+</script>
+{{>layouts/footer}}

@@ -12,10 +12,16 @@ public class MainController {
         return "main";
     }
 
+    @RequestMapping("/join")
+    public String join(){
+        return "join";
+    }
+
     @RequestMapping("/login")
-    public String Login(){
+    public String login(){
         return "login";
     }
+
     @RequestMapping("/goodbye")
     public String goodbye(Model model){
         model.addAttribute("name" , "너" );

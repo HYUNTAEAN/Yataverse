@@ -5,72 +5,51 @@
     <div class="input-form-backgroud row">
         <div class="input-form col-md-12 mx-auto">
             <h4 class="mb-3">Join us</h4>
-            <form class="validation-form" novalidate>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="name">First Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="" value="" required>
-                        <div class="invalid-feedback"> 이름을 입력해주세요. </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="nickname">Last Name</label>
-                        <input type="text" class="form-control" id="nickname" placeholder="" value="" required>
-                        <div class="invalid-feedback"> 별명을 입력해주세요. </div>
-                    </div>
-                </div>
+            <form class="validation-form" action="/login/chk" method="post" onsubmit="return formChk();">
                 <div class="mb-3">
-                    <label for="email">Mail Address</label>
-                    <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
-                    <div class="invalid-feedback"> 이메일을 입력해주세요. </div>
+                    <label for="userid">ID</label>
+                    <input type="text" class="form-control" id="uid" name="uid" placeholder="" required>
+                    <div class="invalid-feedback"> Please check your id </div>
                 </div>
+                <div id="id_warn"></div>
                 <div class="mb-3">
-                    <label for="address">City</label>
-                    <input type="text" class="form-control" id="address" placeholder="Gu Gangnam, City Seoul" required>
-                    <div class="invalid-feedback"> 주소를 입력해주세요. </div>
+                    <label for="userpwd">PWD</label>
+                    <input type="password" class="form-control" id="upw" name="upw" placeholder="" required>
+                    <div class="invalid-feedback"> Please check your pwd </div>
                 </div>
-                <div class="mb-3">
-                    <label for="address2">Street<span class="text-muted">&nbsp;(필수 아님)</span></label>
-                    <input type="text" class="form-control" id="address2" placeholder="상세주소를 입력해주세요.">
-                </div>
-                <div class="row">
-                    <div class="col-md-8 mb-3">
-                        <label for="root">가입 경로</label>
-                        <select class="custom-select d-block w-100" id="root">
-                            <option value=""></option>
-                            <option>검색</option>
-                            <option>카페</option>
-                        </select>
-                        <div class="invalid-feedback"> 가입 경로를 선택해주세요. </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="code">추천인 코드</label>
-                        <input type="text" class="form-control" id="code" placeholder="" required>
-                        <div class="invalid-feedback"> 추천인 코드를 입력해주세요. </div>
-                    </div>
-                </div>
-                <hr class="mb-4">
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="aggrement" required>
-                    <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
-                </div>
+                <div id="login_warn"></div>
                 <div class="mb-4"></div>
-                <button class="btn btn-primary btn-lg btn-block" type="submit">가입 완료</button>
+                <button class="btn btn-primary btn-lg btn-block" id="submitBtn" type="submit">로그인</button>
             </form>
         </div>
     </div>
 </div>
 <script>
-window.addEventListener('load', () => {
-    const forms = document.getElementsByClassName('validation-form');
-    Array.prototype.filter.call(forms, (form) => {
-        form.addEventListener('submit', function (event) {
-            if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
+function formChk(){
+    let userid = $('#userid').val();
+    let userpwd = $('#userpwd').val();
+    let myData = { "userid" : userid , "userpwd" : userpwd};
+    boolean chk = true;
+    $.ajax({
+        url : "loginchk"
+        ,method : "POST"
+        ,data : myData
+        ,success : function(resp){
+            if(resp == 1){
+                chk = false;
+                $('#login_warn').text("계정 정보가 잘못됐습니다.");
+                $("#login_warn").css("color", "red");
+                $("#login_warn").css("font-size", "15px");
+			    $("#login_warn").css("margin-left", "0px");
             }
-        form.classList.add('was-validated');
-        }, false);
+        }
     });
-    },
-false);
+
+    return chk;
+}
 </script>
+
+
+
+
+{{>layouts/footer}}
