@@ -1,10 +1,12 @@
 package com.blog.yataverse.repository;
 
-import com.blog.yataverse.entity.userinfo;
+import com.blog.yataverse.entity.Userinfo;
 import org.springframework.data.repository.CrudRepository;
 
-public interface UserRepository extends CrudRepository<userinfo, Integer> {
+public interface UserRepository extends CrudRepository<Userinfo, Long> {
 
-    boolean existsByuserid(String userid);
 
+    Userinfo findUserByEmail(String email);
+
+    boolean existsByEmail(String email);
 }

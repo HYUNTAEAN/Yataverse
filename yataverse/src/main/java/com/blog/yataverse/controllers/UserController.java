@@ -1,11 +1,13 @@
 package com.blog.yataverse.controllers;
 
-import com.blog.yataverse.dto.JoinDTO;
-import com.blog.yataverse.entity.userinfo;
+import com.blog.yataverse.entity.Userinfo;
 import com.blog.yataverse.repository.UserRepository;
+import com.blog.yataverse.service.ExService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -14,27 +16,32 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class UserController {
 
     @Autowired
+    private ExService service;
+
+    @Autowired
     private UserRepository userRepository;
 
 
-    @RequestMapping("/join/create")
-    public String createArticle(JoinDTO form){
-        log.info(form.toString());
+    @GetMapping("/join")
+    public String join(){
+        return "join";
+    }
 
-        //1. DTO -> Entity
-        userinfo join = form.toEntity();
-        System.out.println(join.toString());
+    @PostMapping("/join")
+    public String joinUser(Userinfo user){
+        user.setRole("USER");
+        service.joinUser(user);
+        return "redirect:/login";
+    }
 
-        //2. Repo <-- Entity 전송
-        userRepository.save(join);
-        log.info("success");
-        //System.out.println("saved"+saved.toString());
-        return "main";
+    @GetMapping("/login")
+    public String login(){
+        return "login";
     }
 
     @RequestMapping("/idchk")
-    public @ResponseBody int idChk(String userid){
-        boolean result = userRepository.existsByuserid(userid);
+    public @ResponseBody int idChk(String email){
+        boolean result = userRepository.existsByEmail(email);
         int chk = 0;
 
         if(!result){
