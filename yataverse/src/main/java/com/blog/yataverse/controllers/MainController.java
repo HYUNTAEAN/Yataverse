@@ -2,7 +2,6 @@ package com.blog.yataverse.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
@@ -23,11 +22,13 @@ public class MainController {
         return "main";
     }
 
-
-
-    @RequestMapping("/goodbye")
-    public String goodbye(Model model){
-        model.addAttribute("name" , "너" );
-        return "goodbye";
+    @RequestMapping("/access-denied")
+    public String denied(){
+        log.info("hey");
+        return "/login";
     }
+
+
+
+
 }

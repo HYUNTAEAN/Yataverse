@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final ExService exService;
+
     /**
      * 규칙 설정
      * @param http
@@ -20,15 +21,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.
+            csrf().disable();
         http.authorizeRequests()
-                    .antMatchers("/goodbye").hasRole("USER")
-                .antMatchers("/login").permitAll()
-                .antMatchers("/").permitAll()
-                    .antMatchers("/join").anonymous()
+                    .antMatchers("/chat","/chat/*").hasRole("USER")
+                    .antMatchers("/font-awesome/**","/css/**","/","/login","/join").permitAll()
+//                    .anyRequest().authenticated()
                 .and()
                     .formLogin()
+                    .loginPage("/login")
+                    .loginProcessingUrl("/loginProcess")
+                    .defaultSuccessUrl("/")
+                    .failureUrl("/login")
+                    .usernameParameter("email")
+                    .passwordParameter("userpwd")
+                    .permitAll()
+
                 .and()
-                    .csrf().disable();		//로그인 창
+                    .logout()
+                    .logoutSuccessUrl("/")
+                    .permitAll()
+
+                .and()
+                    .exceptionHandling().accessDeniedPage("/access-denied")
+                ;	//로그인 창
+
     }
 
     /**

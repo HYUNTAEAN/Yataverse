@@ -2,50 +2,34 @@
 
 <!-- content -->
 <div class="container">
-    <div class="input-form-backgroud row">
+    <div class="input-form-backgroud row pt-5">
         <div class="input-form col-md-12 mx-auto">
-            <h4 class="mb-3">Join us</h4>
-            <form class="validation-form" action="/login/chk" method="post" onsubmit="return formChk();">
+            <h4 class="mb-3">Login</h4>
+            <form class="validation-form" action="/loginProcess" method="post" onsubmit="return formChk();">
                 <div class="mb-3">
                     <label for="userid">ID</label>
-                    <input type="text" class="form-control" id="uid" name="uid" placeholder="" required>
+                    <input type="text" class="form-control" id="email" name="email" placeholder="" required>
                     <div class="invalid-feedback"> Please check your id </div>
                 </div>
                 <div id="id_warn"></div>
                 <div class="mb-3">
                     <label for="userpwd">PWD</label>
-                    <input type="password" class="form-control" id="upw" name="upw" placeholder="" required>
+                    <input type="password" class="form-control" id="userpwd" name="userpwd" placeholder="" required>
                     <div class="invalid-feedback"> Please check your pwd </div>
                 </div>
                 <div id="login_warn"></div>
                 <div class="mb-4"></div>
                 <button class="btn btn-primary btn-lg btn-block" id="submitBtn" type="submit">로그인</button>
+                <button class="btn btn-primary btn-lg btn-block" type="button" onclick="location.href='join'">회원가입</button>
             </form>
         </div>
     </div>
 </div>
 <script>
 function formChk(){
-    let userid = $('#userid').val();
+    let email = $('#email').val();
     let userpwd = $('#userpwd').val();
-    let myData = { "userid" : userid , "userpwd" : userpwd};
-    boolean chk = true;
-    $.ajax({
-        url : "loginchk"
-        ,method : "POST"
-        ,data : myData
-        ,success : function(resp){
-            if(resp == 1){
-                chk = false;
-                $('#login_warn').text("계정 정보가 잘못됐습니다.");
-                $("#login_warn").css("color", "red");
-                $("#login_warn").css("font-size", "15px");
-			    $("#login_warn").css("margin-left", "0px");
-            }
-        }
-    });
-
-    return chk;
+    return;
 }
 </script>
 
