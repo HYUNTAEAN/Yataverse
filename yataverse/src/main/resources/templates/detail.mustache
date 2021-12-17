@@ -1,0 +1,104 @@
+{{>layouts/header}}
+{{#sell}}
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">구매신청</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="buyfrm" action="/buy" method="post">
+                    <input type="hidden" name="email" value="{{email}}">
+                <textarea class="textar2" name="buytext"></textarea>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="buy();">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper pt-5">
+    <div class="colsell pt-5">
+        <div class="card h-50">
+            <div id="map{{id}}" style="width:100%;height:30vh;"></div>
+            <script>
+            var mapOptions = {
+                center: new naver.maps.LatLng({{lat}}, {{lng}}),
+                zoom: 10
+            };
+            var map = new naver.maps.Map('map{{id}}', mapOptions);
+            var marker = new naver.maps.Marker({
+                position: new naver.maps.LatLng({{lat}}, {{lng}}),
+                map: map
+            });
+            </script>
+        </div>
+
+    </div>
+
+
+
+    <div class="container">
+        <div class="input-form-backgroud row">
+            <div class="input-form col-md-12 mx-auto">
+                <h4 class="mb-3">Yataverse Trade!</h4>
+                <form class="validation-form" id="upfrm" action="/updateProcess" method="post">
+                    <div class="mb-3">
+                        <label for="itemname">제목</label>
+                        <input type="text" class="form-control" id="itemName" name="itemName" value="{{itemName}}" disabled>
+                        <input type="hidden" name="id" value="{{id}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="userpwd">내용</label>
+                        <textarea class="textar form-control" id="itemDesc" name="itemDesc" readonly>{{itemDesc}}</textarea>
+                    </div>
+
+                    <div class="mb-4"></div>
+                    {{#chk}}
+                    <button class="btn btn-primary btn-lg btn-block" type="button" id="upBtn" onclick="update();">수정</button>
+                    <button class="btn btn-primary btn-lg btn-block" type="button" onclick="location.href='/delete?id={{id}}'">삭제</button>
+                    {{/chk}}
+                    {{^chk}}
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            구매신청
+                        </button>
+                    {{/chk}}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{/sell}}
+{{>layouts/footer}}
+
+<script>
+let myModal = $('#myModal');
+let myInput = $('#myInput');
+
+myModal[0].addEventListener('shown.bs.modal', function () {
+  myInput.focus()
+});
+
+function update(){
+    $('#itemDesc').attr("readonly", false);
+    $('#itemName').attr("disabled", false);
+    $('#upBtn').html("수정완료");
+    $('#upBtn').removeAttr("onclick");
+    $('#upBtn').attr("onclick", "updateProcess();");
+}
+
+function updateProcess(){
+    $('#upfrm').submit();
+}
+
+function buy(){
+    buyfrm.submit();
+}
+
+</script>

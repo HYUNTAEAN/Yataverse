@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,4 +28,30 @@ public class TradeService {
         return list;
     }
 
+    public Optional<Sellinfo> findOne(Long id) {
+        Optional<Sellinfo> sell = repository.findById(id);
+
+        return sell;
+    }
+
+    public boolean updateOne(Long id, String itemName, String itemDesc) {
+        Optional<Sellinfo> sell = repository.findById(id);
+        boolean result = true;
+        sell.ifPresent(sellinfo -> {
+            sellinfo.setItemName(itemName);
+            sellinfo.setItemDesc(itemDesc);
+
+            repository.save(sellinfo);
+        });
+        return result;
+    }
+
+    public Boolean deleteOne(Long id) {
+        Optional<Sellinfo> sell = repository.findById(id);
+        boolean result = true;
+        sell.ifPresent(sellinfo -> {
+            repository.delete(sellinfo);
+        });
+        return result;
+    }
 }

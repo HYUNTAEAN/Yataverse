@@ -1,0 +1,39 @@
+{{>layouts/header}}
+<section id="msgScroll">
+{{#msgList}}
+    <div class="msgWrapper pt-5" id="msg{{id}}">
+        <button type="button" class="btn btn-success no-rounded" onclick="delMsg({{id}});">Delete</button>
+        <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" title="Message" data-bs-content="{{descMsg}}">
+            ▶{{fromEmail}}'s Message</button>
+    </div>
+{{/msgList}}
+</section>
+{{^msgList}}
+    <div class="pt-5">
+        <h5>No Message!</h5>
+    </div>
+
+{{/msgList}}
+{{>layouts/footer}}
+<script>
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+      return new bootstrap.Popover(popoverTriggerEl)
+    })
+
+    function delMsg(id){
+        const div = $('#msg'+id);
+        div.remove();
+
+        let myData = {"id" : id}
+
+        $.ajax({
+            url : 'delMsg'
+            , method : 'GET'
+            , data : myData
+            , success : function(){
+
+            }
+        });
+    }
+</script>

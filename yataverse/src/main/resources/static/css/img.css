@@ -14,6 +14,9 @@
 	border: 0
 
 }
+.letter-box {
+    margin-right: -600px;
+}
 
 .card img{
     overflow: hidden;
@@ -42,6 +45,11 @@
 }
 .textar {
     height:300px;
+    resize:none;
+}
+.textar2 {
+    height:300px;
+    width:465px;
     resize:none;
 }
 .thumbcard img{
