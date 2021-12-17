@@ -51,7 +51,7 @@ public class ChatHandler extends TextWebSocketHandler {
                         Map<String, String> mapToSend = new HashMap<String, String>();
                         mapToSend.put("bang_id", bang_id);
                         mapToSend.put("cmd", "CMD_ENTER");
-                        mapToSend.put("msg", mapReceive.get("uname") +  "님이 입장 했습니다.");
+                        mapToSend.put("msg", mapReceive.get("uname") +  "has Entered.");
 
                         String jsonStr = objectMapper.writeValueAsString(mapToSend);
                         sess.sendMessage(new TextMessage(jsonStr));
@@ -116,7 +116,7 @@ public class ChatHandler extends TextWebSocketHandler {
                 Map<String, String> mapToSend = new HashMap<String, String>();
                 mapToSend.put("bang_id", bang_id);
                 mapToSend.put("cmd", "CMD_EXIT");
-                mapToSend.put("msg", fname + "님이 퇴장 했습니다.");
+                mapToSend.put("msg", fname + "had Left.");
 
                 String jsonStr = objectMapper.writeValueAsString(mapToSend);
                 sess.sendMessage(new TextMessage(jsonStr));

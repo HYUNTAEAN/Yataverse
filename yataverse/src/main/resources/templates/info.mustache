@@ -1,0 +1,55 @@
+{{>layouts/header}}
+<div class="pt-5">
+    <h1>Yataverse!</h1>
+    <img height="300" width="500" src="https://user-images.githubusercontent.com/88410343/146430676-aa952baa-7857-41e7-8d78-95f27e79f37c.png">
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                    Project overview
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body">
+                    <strong>Yataverse!は</strong> Spring Boot + Intelli J IDEA + MySQL 基盤のWeb-Siteです。<br>
+                    新しい技術を身につけると同時に、様々な機能実装にチャレンジすることを目指して開発しました。<br>
+                    <code>Spring Security</code>,
+                    <code>WebSocket</code>
+                    などの技術が実装しております。
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                    Why is it called 'Yataverse'?
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                <div class="accordion-body">
+                    <strong>'Yataverse'</strong>の名前の元は<code>'Yahoo'</code> + <code>'メタバース'</code>です。<br>
+                    <code>'Metaverse'</code>というものは、仮想と現実の世界を繋がっている空間であり、<br>
+                    人の生活をアドバイスする全ての機能を一つのWebSiteで実装したら<br>
+                    それが本当のメタバースになると考えています。
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                    Service List
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                <div class="accordion-body">
+                    <strong>Chat!</strong> <code>WebSocket(SockJS)</code> ▶Multiple Chat Room<br>
+                    <strong>Trade!</strong> <code>Naver Map API</code> ▶Map-Based Trade System<br>
+                    <strong>Yasukete!</strong><br>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{{>layouts/footer}}

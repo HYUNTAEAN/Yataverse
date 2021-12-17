@@ -1,13 +1,10 @@
 {{>layouts/header}}
 <div class="chat"> <!--전체박스-->
     <div class="left-box pt-5"> <!--왼쪽박스-->
-        <section class="sc">
-        <input type="text" id="inputid">
-        <input type="button" value="Go chat !" onclick="chatgo();">
-        <pre id="uidpre"></pre>
-        <pre id="unamepre"></pre>
+        <section class="sc" id="scroll-left">
+
         <!-- 채팅방 리스트 -->
-            <div class="chat-list">
+            <div class="chat-list" id="chat-list">
 
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
@@ -17,9 +14,19 @@
                             <button type="button" class="btn btn-primary" onclick="worldChat();">Chat Now!</button>
                         </div>
                     </div>
+                    <!-- 커스텀 채팅방 썸네일 나올 곳-->
 
             </div>
         </section>
+        <div class="pb-2">
+            <button type="button" class="btn btn-secondary btn-sm">
+                <pre id="uidpre">Room Id : Not Entered</pre>
+            </button>
+        </div>
+        <input class="form-control border no-shadow no-rounded" placeholder="Insert room id" id="inputid">
+        <span class="input-group-btn">
+            <button class="btn btn-success no-rounded" type="button" onclick="chatgo();">Go chat !</button>
+        </span>
     </div>
 
     <!-- 오른쪽 박스 -->
@@ -43,7 +50,7 @@
 
         <input type="hidden" id="roomid">
         <input type="hidden" id="uname" value="">
-        <input class="form-control border no-shadow no-rounded" placeholder="Type your message here" id="message" onkeypress="if(event.keyCode==13){commandChk();}">
+        <input class="form-control border no-shadow no-rounded" placeholder="Write a Message" id="message" onkeypress="if(event.keyCode==13){commandChk();}">
         <span class="input-group-btn">
             <button class="btn btn-success no-rounded" type="button" onclick="commandChk()">Send</button>
         </span>
@@ -150,11 +157,30 @@ let webSocket = {
 function worldChat(){
     let worldUrl = 'YataverseWorldChatTest';
     $('#inputid').val(worldUrl);
+    recentChk = 1;
     chatgo();
+}
+
+let recentChk = 0;
+
+function recentgo(roomid){
+    let recentUrl = roomid;
+    $('#inputid').val(recentUrl);
+    recentChk = 1;
+    chatgo();
+}
+function chatDel(roomid){
+    let delDiv = $('#roomcard'+roomid);
+    delDiv.remove();
+    worldChat();
 }
 
 function chatgo() {
 		let roomid = $('#inputid').val();
+		if(roomid == ''){
+		    roomid = 'YataverseWorldChatTest';
+		}
+
 		let uname = $('#uname').val();
 		let chatUrl = 'chat?roomid=' + roomid;
 		let myData = {
@@ -169,16 +195,35 @@ function chatgo() {
 
 					webSocket.disconnect();
 				}
+
 				$('#roomid').val(roomid);
 				$('#uname').val(uname);
-				$('#uidpre').html("방번호 : " + roomid);
-				$('#unamepre').html("사용자 : " + uname);
-                $('#inputid').val(" ");
+				$('#uidpre').html("Room Id : " + roomid);
+                $('#inputid').val("");
 
 				webSocket.init({
 					url : '/chat'
 				});
+                if(roomid == 'YataverseWorldChatTest'){
+                    recentChk = 1;
+                }
+                if(recentChk != 1){
+                    $('#chat-list').append(
+                        '<div class="card" style="width: 18rem;" id="roomcard'+roomid+'">'+
+                            '<div class="card-body">'+
+                                '<h5 class="card-title">Chat Room : '+roomid+'</h5>'+
+                                '<img src="https://user-images.githubusercontent.com/88410343/146410698-038074fd-0fbc-4462-b8d0-9e4ef4ab22c6.jpg">'+
+                                '<p class="card-text">Recently Chat Room</p>'+
+                                '<button type="button" class="btn btn-primary" onclick="recentgo('+roomid+');">Chat Now!</button>'+
+                                '<button style="float:right; background-color:red; border-color:red;" type="button" class="btn-del btn-primary" onclick="chatDel('+roomid+');">Delete this Room</button>'+
+                            '</div>'+
+                        '</div>'
 
+                    );
+                    $("#scroll-left").scrollTop($("#scroll-left")[0].scrollHeight);
+                }
+
+                recentChk = 0;
 			}
 		});
 	}

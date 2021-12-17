@@ -28,6 +28,10 @@ public class MainController {
         return "/login";
     }
 
+    @RequestMapping("/info")
+    public String info(){
+        return "/info";
+    }
 
 
 

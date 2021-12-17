@@ -1,0 +1,73 @@
+{{>layouts/header}}
+<div class="wrapper pt-5">
+    <div class="colsell pt-5">
+        <div class="card h-50">
+            <div id="map" style="width:100%;height:100vh;"></div>
+            <script>
+            var mapOptions = {
+                center: new naver.maps.LatLng(37.3595704, 127.105399),
+                zoom: 10
+            };
+            var map = new naver.maps.Map('map', mapOptions); // id와 option
+            </script>
+            <!--<img src="" class="card-img-top" id="prevImg" alt="item"
+                 onerror="this.src='https://user-images.githubusercontent.com/88410343/146478164-e046a08d-8897-4c1e-b699-9c835c7aedbb.png'">
+            -->
+        </div>
+
+    </div>
+
+
+
+        <div class="container">
+            <div class="input-form-backgroud row">
+                <div class="input-form col-md-12 mx-auto">
+                    <h4 class="mb-3">Sell</h4>
+                    <form class="validation-form" action="/sellProcess" method="post" enctype="multipart/form-data" onsubmit="return formChk();">
+                        <div class="mb-3">
+                            <label for="itemname">제목</label>
+                            <input type="text" class="form-control" id="itemName" name="itemName" placeholder="" required>
+                            <input type="hidden" id="locat" name="locat" value="(lat:37.3595704,lng:127.105399)">
+                        </div>
+                        <div id="id_warn"></div>
+                        <div class="mb-3">
+                            <label for="userpwd">내용</label>
+                            <textarea class="textar form-control" id="itemDesc" name="itemDesc" placeholder=""></textarea>
+                        </div>
+                        <div id="login_warn"></div>
+
+                        <!--<div class="filein pt-2">
+                            <input type="file" id="itemimg" name="itemimg">
+                        </div>-->
+
+                        <div class="mb-4"></div>
+                        <button class="btn btn-primary btn-lg btn-block" id="submitBtn" type="submit">등록</button>
+                        <button class="btn btn-primary btn-lg btn-block" type="button" onclick="location.href='/trade'">취소</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
+
+{{>layouts/footer}}
+
+<script>
+
+
+var map = new naver.maps.Map('map', {
+    center: new naver.maps.LatLng(37.3595704, 127.105399),
+    zoom: 10
+});
+
+var marker = new naver.maps.Marker({
+    position: new naver.maps.LatLng(37.3595704, 127.105399),
+    map: map
+});
+
+naver.maps.Event.addListener(map, 'click', function(e) {
+    $('#locat').val(e.latlng);
+    marker.setPosition(e.latlng);
+});
+
+
+</script>

@@ -17,9 +17,9 @@ public class ChatController {
 
     @GetMapping("/chat")
     public String chat(HttpSession session){
-        String roomid = "1";
-
-        session.setAttribute("roomid", roomid);
+//        String roomid = "1";
+//
+//        session.setAttribute("roomid", roomid);
         log.info("chat컨트롤러1");
         return "chat";
     }
@@ -45,7 +45,8 @@ public class ChatController {
         String loginId="";
         if(principal != null){
             loginId = principal.getName();
-            log.info(loginId);
+            String[] nick = loginId.split("@");
+            loginId = nick[0];
             session.setAttribute("loginId", loginId);
         }
         return loginId;

@@ -15,6 +15,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
     <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=trfxqwxihu"></script>
 </head>
 <body class="pt-5">
 <!-- navigation -->
@@ -39,36 +40,51 @@
             <div class="offcanvas-body">
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/">
+                            <img src="https://user-images.githubusercontent.com/88410343/146425428-099f8808-61c5-45a6-84a9-6b5f6033ef22.jpeg" alt="hbtn" width="42" height="30">
+                            Home
+                        </a>
                     </li>
                 {{^loginId}}
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
+                        <a class="nav-link" href="/login">
+                            <img src="https://user-images.githubusercontent.com/88410343/146426098-e24e1828-405b-410f-accf-bb7896c28376.png" alt="inbtn" width="42" height="30">
+                            Login
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/join">Join us</a>
+                        <a class="nav-link" href="/join">
+                            <img src="https://user-images.githubusercontent.com/88410343/146426347-0724b7dd-6b9b-43b1-93ab-d6cbd1793284.png" alt="inbtn" width="42" height="30">
+                            Join us
+                        </a>
                     </li>
                 {{/loginId}}
                 {{#loginId}}
                     <li class="nav-item">
-                        <a class="nav-link" href="/logout">Logout</a>
+                        <a class="nav-link" href="/logout">
+                            <img src="https://user-images.githubusercontent.com/88410343/146425784-7c0dc454-5a29-4adf-b69a-a81abaa6e6c2.jpg" alt="otbtn" width="42" height="30">
+                            Logout
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/modify">Modify</a>
+                        <a class="nav-link" href="/modify">
+                            <img src="https://user-images.githubusercontent.com/88410343/146426866-ba7a253d-289e-47dd-a0c8-dcccd7dc2f25.jpg" alt="otbtn" width="42" height="30">
+                            My Page
+                        </a>
                     </li>
                 {{/loginId}}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
-                            <li><a class="dropdown-item" href="/chat">Chat!</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                            <li><a class="dropdown-item" href="/chat">▶ Chat!</a></li>
+                            <li><a class="dropdown-item" href="#">▶ Trade!</a></li>
+                            <li><a class="dropdown-item" href="#">▶ Yasukete!</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
+                    <li>
+                        <hr class="dropdown-divider">
                     </li>
                 </ul>
                 <form class="d-flex">
