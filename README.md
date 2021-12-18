@@ -2,7 +2,7 @@
 
 ![yattt](https://user-images.githubusercontent.com/88410343/146653518-64d1e8ad-17ad-4d11-bb45-73ec711e71df.png)
 
-![hed](https://user-images.githubusercontent.com/88410343/146653605-ffd30d63-9478-4296-b69f-316e0ba62d07.png)
+![z](https://user-images.githubusercontent.com/88410343/146653997-780b6677-88ff-4e19-ba0c-a73f5f257e80.png)
 
 ![abt](https://user-images.githubusercontent.com/88410343/146653552-c8b14c89-c892-42f2-ba72-4bda3a246057.png)
 
