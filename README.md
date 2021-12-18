@@ -12,7 +12,7 @@
 
 ![yat5](https://user-images.githubusercontent.com/88410343/146626589-1c3603d5-63a0-4d02-b110-853afb89ff5d.png)
 
-![yat6](https://user-images.githubusercontent.com/88410343/146626590-6ed1f17f-9eee-4742-ac81-e7d71aa62de2.png)
+![f](https://user-images.githubusercontent.com/88410343/146653920-5d158fa0-59df-4192-b77d-f34b91459743.png)
 
 ![aa](https://user-images.githubusercontent.com/88410343/146653808-af2f49f1-293b-4a89-83fa-8015553c75bb.png)
 
