@@ -10,8 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -25,23 +27,45 @@ public class QnaController {
         //index 값 들어오게 한다음
         log.info("도착");
         long count = service.count();
-        List<Questinfo> list = service.findAll();
 
-        if(count > 0){
-            Questinfo q = list.get(idx);
-
+        List<Questinfo> list = service.findAll(); //게시글 전부 가져옴
+        if(list.size() < 1){
+            return "/qna"; //게시글 미존재시 바로 리턴
+        }
+        
+        Questinfo q = list.get(idx-1); //idx로 게시글 선택
+        
+        if(count > 0){ //댓글 존재여부 확인
             Long ansIdx = q.getId();
             List<Answerinfo> ansList = service.findAnswer(ansIdx);
-
-            for(Answerinfo a : ansList){
-                log.info(a.getQuestDesc());
-            }
 
             model.addAttribute("ansList", ansList);
             model.addAttribute("questList", q);
         } else {
-            model.addAttribute("questList", list);
+            model.addAttribute("questList", q);
         }
+
+        //페이징 처리
+        int plus = 5;
+        int pIdx = 1;
+        long qCount = service.qCount();
+
+        ArrayList page = new ArrayList();
+        if(qCount > 0) {
+            pIdx = (((idx - 1) / 5) * 5) + 1;
+        }
+
+        if(qCount < pIdx+4){
+            plus = (int)(qCount%5);
+        }
+        for(int i = pIdx; i < pIdx+plus; i++){
+            page.add(i);
+        }
+
+        model.addAttribute("page", page);
+        model.addAttribute("firstPage", pIdx);
+        model.addAttribute("nowPage", idx);
+
         return "/qna";
     }
     @RequestMapping("/quest")
@@ -77,7 +101,7 @@ public class QnaController {
             model.addAttribute("questList", list);
         }
 
-        return "redirect:/qna?idx=0";
+        return "redirect:/qna?idx=1";
     }
 
     @RequestMapping("/ansGo")
@@ -112,8 +136,26 @@ public class QnaController {
         } else {
             model.addAttribute("questList", list);
         }
+        return "redirect:/qna?idx=1";
+    }
 
+    @RequestMapping("/delReply")
+    public String delReply(Long id){
 
-        return "redirect:/qna?idx=0";
+        service.delReply(id);
+
+        return "redirect:/qna?idx=1";
+    }
+
+    @RequestMapping("/pageChk")
+    public @ResponseBody String pageChk(int page){
+
+        long qCount = service.qCount();
+
+        if(qCount > (page+4)){
+            return "Success";
+        }
+
+        return "Fail";
     }
 }

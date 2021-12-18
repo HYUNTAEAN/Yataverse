@@ -54,4 +54,10 @@ public class QuestService {
     public long count() {
         return ansRepository.count();
     }
+
+    public void delReply(Long id) {
+        ansRepository.deleteById(id);
+    }
+
+    public long qCount() { return repository.count(); }
 }
