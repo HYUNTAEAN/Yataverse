@@ -7,13 +7,15 @@
             ▶{{fromEmail}}'s Message</button>
     </div>
 {{/msgList}}
-</section>
 {{^msgList}}
-    <div class="pt-5">
+    <div class="pt-5" style="text-align:center">
+        <img src="https://user-images.githubusercontent.com/88410343/146627644-fbbafe3f-8799-43af-a33e-e245814a02b8.jpeg">
         <h5>No Message!</h5>
     </div>
 
 {{/msgList}}
+
+</section>
 {{>layouts/footer}}
 <script>
     var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
@@ -23,7 +25,6 @@
 
     function delMsg(id){
         const div = $('#msg'+id);
-        div.remove();
 
         let myData = {"id" : id}
 
@@ -33,6 +34,7 @@
             , data : myData
             , success : function(){
 
+                div.remove();
             }
         });
     }

@@ -30,4 +30,9 @@ public class MessageService {
     public void delMsg(Long id) {
         repository.deleteById(id);
     }
+
+    public int msgCount(String email) {
+        int count = repository.countByToEmail(email);
+        return count;
+    }
 }

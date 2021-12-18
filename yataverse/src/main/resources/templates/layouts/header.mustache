@@ -16,7 +16,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.js"></script>
     <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=trfxqwxihu"></script>
-
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url : 'msgCount'
+                , method : 'GET'
+                , success : function(resp){
+                    $('#msgcnt').html(resp);
+                }
+            });
+        });
+    </script>
 </head>
 <body class="pt-5">
 <!-- navigation -->
@@ -29,8 +39,8 @@
         <div class="letter-box">
             <button type="button" class="btn btn-primary position-relative" onclick="location.href='/msgbox'">
                 Message Box
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    99+
+                <span id="msgcnt" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+
                     <span class="visually-hidden">unread messages</span>
                 </span>
             </button>
@@ -79,7 +89,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/modify">
+                        <a class="nav-link" href="/mypage">
                             <img src="https://user-images.githubusercontent.com/88410343/146426866-ba7a253d-289e-47dd-a0c8-dcccd7dc2f25.jpg" alt="otbtn" width="42" height="30">
                             My Page
                         </a>
@@ -89,7 +99,7 @@
                         <hr class="dropdown-divider">
                     </li>
                             <li><a class="dropdown-item" href="/chat">▶ Chat!</a></li>
-                            <li><a class="dropdown-item" href="#">▶ Trade!</a></li>
+                            <li><a class="dropdown-item" href="/trade">▶ Trade!</a></li>
                             <li><a class="dropdown-item" href="#">▶ Yasukete!</a></li>
                     <li>
                         <hr class="dropdown-divider">

@@ -8,4 +8,5 @@ import java.util.List;
 public interface MessageRepository extends CrudRepository<Messageinfo, Long> {
     List<Messageinfo> findByToEmail(String toEmail);
 
+    int countByToEmail(String email);
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,14 +42,15 @@ public class TradeController {
     }
 
     @PostMapping("/sellProcess")
-    public String sellProcess(HttpSession session, String itemName, String itemDesc, String locat, Model model){
+    public String sellProcess(Principal principal, String itemName, String itemDesc, String locat, Model model){
 
 
         String loca[] = locat.split(",");
 
         String lat = loca[0].substring(5);
         String lng = loca[1].substring(4,loca[1].length()-1);
-        String email = (String) session.getAttribute("loginId");
+
+        String email = principal.getName();
 
         Sellinfo sell = new Sellinfo(0L, email, itemName, itemDesc, lat, lng);
 
@@ -59,13 +61,13 @@ public class TradeController {
         model.addAttribute("sellList", list);
         log.info("좌표확인좀");
 
-        return "/trade";
+        return "redirect:/trade";
     }
 
     @RequestMapping("/detail")
-    public String detail(HttpSession session, Model model, Long id){
+    public String detail(Principal principal, Model model, Long id){
         boolean chk = false;
-        String loginId = (String) session.getAttribute("loginId");
+        String loginId = principal.getName();
 
         Optional<Sellinfo> sell = service.findOne(id);
         Sellinfo se = sell.get();
@@ -91,7 +93,7 @@ public class TradeController {
         List<Sellinfo> list = service.findAll();
         model.addAttribute("sellList", list);
 
-        return "/trade";
+        return "redirect:/trade";
     }
 
     @RequestMapping("/delete")
@@ -102,7 +104,7 @@ public class TradeController {
         List<Sellinfo> list = service.findAll();
         model.addAttribute("sellList", list);
 
-        return "/trade";
+        return "redirect:/trade";
     }
 
     @RequestMapping("/howtouse")
@@ -111,13 +113,13 @@ public class TradeController {
     }
 
     @PostMapping("/buy")
-    public String buy(String email, String buytext, HttpSession session, Model model){
+    public String buy(String email, String buytext, Principal principal, Model model){
 
         if(buytext == ""){
             buytext = "I Love Yataverse!";
         }
 
-        String myMail = (String) session.getAttribute("loginId");
+        String myMail = principal.getName();
         String[] nick = myMail.split("@");
         myMail = nick[0];
 
@@ -144,8 +146,15 @@ public class TradeController {
 
     @RequestMapping("/delMsg")
     public @ResponseBody void delMsg(Long id){
-
         msgService.delMsg(id);
+    }
 
+    @RequestMapping("/msgCount")
+    public @ResponseBody int msgCount(Principal principal){
+        String email = principal.getName();
+
+        int count = msgService.msgCount(email);
+
+        return count;
     }
 }

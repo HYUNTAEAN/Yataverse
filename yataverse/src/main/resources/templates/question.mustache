@@ -1,0 +1,28 @@
+{{>layouts/header}}
+<div class="pt-5">
+    <div class="card mb-3" >
+        <div class="col-md-4">
+            <img src="https://user-images.githubusercontent.com/88410343/146377192-6643b17f-33d6-4eef-b71f-ba151cbd6565.jpg" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="row g-0">
+
+            <div class="col-md-8">
+                <div class="card-body">
+                    <form class="validation-form" action="/questProcess" method="post">
+                        <div class="mb-3">
+                            <label for="questname">제목</label>
+                            <input type="text" class="form-control" name="questName" required>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="textar3 form-control" name="questDesc"></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <button class="btn btn-primary" type="submit">Question!</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{>layouts/footer}}

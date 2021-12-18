@@ -170,7 +170,8 @@ function recentgo(roomid){
     chatgo();
 }
 function chatDel(roomid){
-    let delDiv = $('#roomcard'+roomid);
+    let cUrl = 'roomcard'+roomid;
+    let delDiv = $('#'+cUrl);
     delDiv.remove();
     worldChat();
 }
@@ -214,8 +215,8 @@ function chatgo() {
                                 '<h5 class="card-title">Chat Room : '+roomid+'</h5>'+
                                 '<img src="https://user-images.githubusercontent.com/88410343/146410698-038074fd-0fbc-4462-b8d0-9e4ef4ab22c6.jpg">'+
                                 '<p class="card-text">Recently Chat Room</p>'+
-                                '<button type="button" class="btn btn-primary" onclick="recentgo('+roomid+');">Chat Now!</button>'+
-                                '<button style="float:right; background-color:red; border-color:red;" type="button" class="btn-del btn-primary" onclick="chatDel('+roomid+');">Delete this Room</button>'+
+                                '<button type="button" class="btn btn-primary" onclick="recentgo(\''+roomid+'\');">Chat Now!</button>'+
+                                '<button style="float:right; background-color:red; border-color:red;" type="button" class="btn-del btn-primary" onclick="chatDel(\''+roomid+'\');">Delete this Room</button>'+
                             '</div>'+
                         '</div>'
 
