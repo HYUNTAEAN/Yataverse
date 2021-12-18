@@ -26,7 +26,10 @@ public class QnaController {
     public String qna(int idx, Model model){
         //index 값 들어오게 한다음
         log.info("도착");
+
+        long qCount = service.qCount();
         long count = service.count();
+
 
         List<Questinfo> list = service.findAll(); //게시글 전부 가져옴
         if(list.size() < 1){
@@ -48,7 +51,6 @@ public class QnaController {
         //페이징 처리
         int plus = 5;
         int pIdx = 1;
-        long qCount = service.qCount();
 
         ArrayList page = new ArrayList();
         if(qCount > 0) {
@@ -81,27 +83,9 @@ public class QnaController {
 
         service.saveQuest(quest);
 
-        int idx = 0;
-        long count = service.count();
-        List<Questinfo> list = service.findAll();
+        Long qCount = service.qCount();
 
-        if(count > 0){
-            Questinfo q = list.get(idx);
-
-            Long ansIdx = q.getId();
-            List<Answerinfo> ansList = service.findAnswer(ansIdx);
-
-            for(Answerinfo a : ansList){
-                log.info(a.getQuestDesc());
-            }
-
-            model.addAttribute("ansList", ansList);
-            model.addAttribute("questList", q);
-        } else {
-            model.addAttribute("questList", list);
-        }
-
-        return "redirect:/qna?idx=1";
+        return "redirect:/qna?idx="+qCount;
     }
 
     @RequestMapping("/ansGo")
@@ -117,45 +101,33 @@ public class QnaController {
 
         service.saveAnswer(answer);
 
-        int idx = 0;
-        long count = service.count();
-        List<Questinfo> list = service.findAll();
 
-        if(count > 0){
-            Questinfo q = list.get(idx);
-
-            Long ansIdx = q.getId();
-            List<Answerinfo> ansList = service.findAnswer(ansIdx);
-
-            for(Answerinfo a : ansList){
-                log.info(a.getQuestDesc());
-            }
-
-            model.addAttribute("ansList", ansList);
-            model.addAttribute("questList", q);
-        } else {
-            model.addAttribute("questList", list);
-        }
-        return "redirect:/qna?idx=1";
+        return "redirect:/qna?idx="+refId;
     }
 
     @RequestMapping("/delReply")
-    public String delReply(Long id){
+    public String delReply(Long id, Long idx){
 
         service.delReply(id);
 
-        return "redirect:/qna?idx=1";
+        return "redirect:/qna?idx="+idx;
     }
 
     @RequestMapping("/pageChk")
     public @ResponseBody String pageChk(int page){
-
         long qCount = service.qCount();
-
         if(qCount > (page+4)){
             return "Success";
         }
-
         return "Fail";
+    }
+
+    @RequestMapping("/srchChk")
+    public @ResponseBody String srchChk(int srch){
+        long qCount = service.qCount();
+        if(srch > qCount){
+            return "Fail";
+        }
+        return "Success";
     }
 }

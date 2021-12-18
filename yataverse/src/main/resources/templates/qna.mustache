@@ -2,7 +2,12 @@
 <div class="pt-5">
     <div class="d-grid gap-2 col-6 mx-auto pb-5">
         <button class="btn btn-primary" type="button" onclick="location.href='/quest'">Question</button>
+        <form class="d-flex">
+            <input class="form-control me-2" id="srch" placeholder="Number of Question" aria-label="Search">
+            <button class="btn btn-outline-success" type="button" onclick="search();">Search</button>
+        </form>
     </div>
+
 
     <div class="card mb-3" >
         <div class="col-md-4">
@@ -12,6 +17,9 @@
 {{#questList}}
             <div class="col-md-8">
                 <div class="card-body">
+                    {{#nowPage}}
+                    <h3>▶ Question No. {{nowPage}}</h3>
+                    {{/nowPage}}
                     <h5 class="card-title">{{questName}}</h5>
                     <p class="card-text">{{questDesc}}</p>
                     <div class="apAnswer">
@@ -25,7 +33,7 @@
                     </div>
                     <ul>
                     {{#ansList}}
-                            ↳ 【 {{email}} 】 : {{questDesc}}   <button type="button" class="btn btn-success no-rounded" style="height:40px; margin-left: 30px;" onclick="location.href='/delReply?id={{id}}'">Delete</button>
+                            ↳ 【 {{email}} 】 : {{questDesc}}   <button type="button" class="btn btn-success no-rounded" style="height:40px; margin-left: 30px;" onclick="location.href='/delReply?id={{id}}&idx={{nowPage}}'">Delete</button>
                                 <hr class="dropdown-divider">
                     {{/ansList}}
                     </ul>
@@ -105,4 +113,21 @@ $(document).ready(function(){
         });
     }
 
+    function search(){
+        let srch = $('#srch').val();
+        let myData = {"srch" : srch};
+
+        $.ajax({
+            url : 'srchChk'
+            , method : 'GET'
+            , data : myData
+            , success : function(resp){
+                if(resp == "Success"){
+                    location.href='/qna?idx='+srch;
+                } else {
+                    alert("해당 질문이 존재하지 않습니다.");
+                }
+            }
+        });
+    }
 </script>
