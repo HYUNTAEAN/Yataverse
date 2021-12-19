@@ -44,7 +44,6 @@ public class WeatherService {
         Elements elem = doc.select(".weather_info");
         String[] str = elem.text().split(" ");
 
-        log.info(String.valueOf(elem));
 
         WeatherVO tomorrow = new WeatherVO();
         tomorrow.setTemp("오전 : " + str[28] + " / 오후 : " + str[39]);
