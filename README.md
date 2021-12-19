@@ -29,3 +29,5 @@
 ![yat12](https://user-images.githubusercontent.com/88410343/146626602-1eed1056-72ae-4705-a953-fd4bd5823095.png)
 
 ![qns](https://user-images.githubusercontent.com/88410343/146653651-2689c43b-0445-454f-8cd2-b0f34800611e.png)
+
+![wett](https://user-images.githubusercontent.com/88410343/146668040-ff7f0af7-2231-4b1d-97aa-72eddebd1efc.png)
