@@ -3,7 +3,7 @@
     <div class="d-grid gap-2 col-6 mx-auto pb-5">
         <button class="btn btn-primary" type="button" onclick="location.href='/quest'">Question</button>
         <form class="d-flex">
-            <input class="form-control me-2" id="srch" placeholder="Number of Question" aria-label="Search">
+            <input class="form-control me-2" type="search" id="srch" placeholder="Number of Question" aria-label="Search">
             <button class="btn btn-outline-success" type="button" onclick="search();">Search</button>
         </form>
     </div>
@@ -41,11 +41,6 @@
                 </div>
             </div>
     <!-- page -->
-            <ul>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-            </ul>
 {{/questList}}
 
         </div>
@@ -122,12 +117,21 @@ $(document).ready(function(){
             , method : 'GET'
             , data : myData
             , success : function(resp){
-                if(resp == "Success"){
-                    location.href='/qna?idx='+srch;
-                } else {
+                if(resp == "Fail"){
                     alert("해당 질문이 존재하지 않습니다.");
+                    location.href='/qna?idx=1';
+                } else {
+                    alert(srch);
+                    location.href='/qna?idx='+srch;
                 }
             }
         });
     }
+
+    $('#srch').keypress(function(e){
+        if(e.keyCode == 13){
+            search();
+        }
+    });
+
 </script>

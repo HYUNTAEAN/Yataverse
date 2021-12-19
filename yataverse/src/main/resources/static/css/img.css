@@ -15,7 +15,8 @@
 
 }
 .letter-box {
-    margin-right: -600px;
+    margin-left:auto;
+    margin-right:20px;
 }
 
 .card img{
@@ -173,4 +174,11 @@
         .btn-del{
             display: inline-block;
         }
+.bd{
+    margin-left: 20px;
+}
 
+
+.snow {
+  color: #fff;
+}

@@ -151,9 +151,19 @@ public class TradeController {
 
     @RequestMapping("/msgCount")
     public @ResponseBody int msgCount(Principal principal){
-        String email = principal.getName();
+        String email = null;
+        try {
+            email = principal.getName();
+        } catch(Exception e){
 
-        int count = msgService.msgCount(email);
+        }
+
+        int count = 0;
+
+        log.info(email);
+        if(email != null){
+            count = msgService.msgCount(email);
+        }
 
         return count;
     }
