@@ -7,15 +7,12 @@ plugins {
 group = 'com.blog'
 version = '1.0.3-SNAPSHOT-'+new Date().format("yyyyMMddHHmmss")
 sourceCompatibility = '1.8'
-apply plugin:'war'
 
 repositories {
 	mavenCentral()
 }
 
 dependencies {
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
@@ -32,9 +29,6 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 }
 
-bootWar {
-	archiveName("yata.war")
-}
 test {
 	useJUnitPlatform()
 }
