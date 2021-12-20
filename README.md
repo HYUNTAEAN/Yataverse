@@ -1,7 +1,6 @@
 # Yataverse
 
-http://3.36.175.82:8080/
-
+Amazon AWS HOST : http://3.36.175.82:8080/
 
 
 ![yattt](https://user-images.githubusercontent.com/88410343/146653518-64d1e8ad-17ad-4d11-bb45-73ec711e71df.png)
