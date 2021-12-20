@@ -33,7 +33,7 @@ public class QnaController {
 
         List<Questinfo> list = service.findAll(); //게시글 전부 가져옴
         if(list.size() < 1){
-            return "/qna"; //게시글 미존재시 바로 리턴
+            return "qna"; //게시글 미존재시 바로 리턴
         }
         
         Questinfo q = list.get(idx-1); //idx로 게시글 선택
@@ -68,7 +68,7 @@ public class QnaController {
         model.addAttribute("firstPage", pIdx);
         model.addAttribute("nowPage", idx);
 
-        return "/qna";
+        return "qna";
     }
     @RequestMapping("/quest")
     public String quest(){

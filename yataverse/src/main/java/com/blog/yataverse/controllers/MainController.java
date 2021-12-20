@@ -25,12 +25,12 @@ public class MainController {
     @RequestMapping("/access-denied")
     public String denied(){
         log.info("hey");
-        return "/login";
+        return "login";
     }
 
     @RequestMapping("/info")
     public String info(){
-        return "/info";
+        return "info";
     }
 
 

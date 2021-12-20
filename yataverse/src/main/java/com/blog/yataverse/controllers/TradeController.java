@@ -33,12 +33,12 @@ public class TradeController {
         List<Sellinfo> list = service.findAll();
         model.addAttribute("sellList", list);
 
-        return "/trade";
+        return "trade";
     }
 
     @GetMapping("/sell")
     public String sell(){
-        return "/sell";
+        return "sell";
     }
 
     @PostMapping("/sellProcess")
@@ -59,7 +59,6 @@ public class TradeController {
         List<Sellinfo> list = service.findAll();
 
         model.addAttribute("sellList", list);
-        log.info("좌표확인좀");
 
         return "redirect:/trade";
     }
@@ -78,7 +77,7 @@ public class TradeController {
 
         model.addAttribute("sell" , se);
         model.addAttribute("chk" , chk);
-        return "/detail";
+        return "detail";
     }
 
     @PostMapping("/updateProcess")
@@ -109,7 +108,7 @@ public class TradeController {
 
     @RequestMapping("/howtouse")
     public String howtouse(){
-        return "/howtouse";
+        return "howtouse";
     }
 
     @PostMapping("/buy")
@@ -129,7 +128,7 @@ public class TradeController {
         List<Sellinfo> list = service.findAll();
         model.addAttribute("sellList", list);
 
-        return "/trade";
+        return "trade";
     }
 
     @RequestMapping("/msgbox")
@@ -141,7 +140,7 @@ public class TradeController {
 
             model.addAttribute("msgList", list);
         }
-        return "/msgbox";
+        return "msgbox";
     }
 
     @RequestMapping("/delMsg")

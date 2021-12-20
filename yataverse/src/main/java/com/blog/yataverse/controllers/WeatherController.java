@@ -41,6 +41,6 @@ public class WeatherController {
         }
 
         model.addAttribute("locat", where);
-        return "/weather";
+        return "weather";
     }
 }
