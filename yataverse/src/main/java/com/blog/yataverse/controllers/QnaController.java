@@ -72,7 +72,7 @@ public class QnaController {
     }
     @RequestMapping("/quest")
     public String quest(){
-        return "/question";
+        return "question";
     }
 
     @PostMapping("/questProcess")
