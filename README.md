@@ -9,8 +9,6 @@ Amazon Web Service EC2 HOST : http://3.36.175.82:8080/
 
 ![z](https://user-images.githubusercontent.com/88410343/146653997-780b6677-88ff-4e19-ba0c-a73f5f257e80.png)
 
-![abt](https://user-images.githubusercontent.com/88410343/146653552-c8b14c89-c892-42f2-ba72-4bda3a246057.png)
-
 ![yat3](https://user-images.githubusercontent.com/88410343/146626586-2a7cb8ba-d507-4b40-a16d-619899842515.png)
 
 ![yat4](https://user-images.githubusercontent.com/88410343/146626588-d1ecfc0d-8602-4ef3-bdd5-f85fdfd798fe.png)
