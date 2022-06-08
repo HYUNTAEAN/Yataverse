@@ -193,18 +193,17 @@ function chatgo() {
 			data : myData,
 			success : function(resp) {
 				if ($('#roomid').val() != '') {
-
 					webSocket.disconnect();
 				}
-
 				$('#roomid').val(roomid);
 				$('#uname').val(uname);
 				$('#uidpre').html("Room Id : " + roomid);
                 $('#inputid').val("");
-
 				webSocket.init({
 					url : '/chat'
 				});
+				
+				
                 if(roomid == 'YataverseWorldChatTest'){
                     recentChk = 1;
                 }
